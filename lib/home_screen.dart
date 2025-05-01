@@ -15,9 +15,9 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 20,
           children: [
-            BlocBuilder<CounterCubit, int>(
-              builder: (context, state) => Text(
-                cubit.state.toString(),
+            Builder(
+              builder: (_) => Text(
+                context.watch<CounterCubit>().state.value.toString(),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
             ),
