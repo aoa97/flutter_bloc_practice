@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_practice/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_practice/bloc/counter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CounterCubit>();
+    final bloc = context.read<CounterBloc>();
 
     return Scaffold(
       body: Center(
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             Builder(
               builder: (_) => Text(
-                context.watch<CounterCubit>().state.value.toString(),
+                context.watch<CounterBloc>().state.value.toString(),
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
             ),
@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
               spacing: 10,
               children: [
                 FilledButton.tonal(
-                  onPressed: cubit.decrement,
+                  onPressed: () => bloc.add(CounterDecrement()),
                   child: const Text("Decrement"),
                 ),
                 FilledButton(
-                  onPressed: cubit.increment,
+                  onPressed: () => bloc.add(CounterIncrement()),
                   child: const Text("Increment"),
                 ),
               ],
