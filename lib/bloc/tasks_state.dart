@@ -1,16 +1,16 @@
-part of 'todo_cubit.dart';
+part of 'tasks_bloc.dart';
 
-sealed class TodoState extends Equatable {
+sealed class TasksState extends Equatable {
   final List<TaskModel> tasks;
 
-  const TodoState(this.tasks);
+  const TasksState(this.tasks);
 
   @override
   List<Object> get props => [tasks];
 }
 
-final class TodoInitial extends TodoState {
-  TodoInitial()
+final class TasksInitial extends TasksState {
+  TasksInitial()
       : super(
           [
             TaskModel(
@@ -25,6 +25,6 @@ final class TodoInitial extends TodoState {
         );
 }
 
-final class TodoUpdate extends TodoState {
-  const TodoUpdate(super.tasks);
+final class TasksUpdate extends TasksState {
+  const TasksUpdate(super.tasks);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_practice/cubit/todo_cubit.dart';
+
+import '../bloc/tasks_bloc.dart';
 
 class TaskAddInput extends StatefulWidget {
   const TaskAddInput({super.key});
@@ -15,13 +16,13 @@ class _TaskAddInputState extends State<TaskAddInput> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<TodoCubit>();
+    final bloc = context.read<TasksBloc>();
 
     submitTask() {
       if (!formKey.currentState!.validate()) {
         return;
       }
-      cubit.addTask(controller.text);
+      bloc.add(TaskAddEvent(controller.text));
       controller.clear();
     }
 

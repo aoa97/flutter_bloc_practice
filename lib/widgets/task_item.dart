@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_practice/models/task_model.dart';
+
+import '../models/task_model.dart';
 
 class TaskItem extends StatelessWidget {
   final TaskModel task;
