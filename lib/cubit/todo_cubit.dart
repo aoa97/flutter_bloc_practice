@@ -1,10 +1,16 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_practice/models/task_model.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'todo_state.dart';
 
-class TodoCubit extends Cubit<TodoState> {
+/* 
+  hydrated_bloc:
+    - Helps to persist & restore bloc and cubit states.
+    - Built on top of hive
+*/
+
+class TodoCubit extends HydratedCubit<TodoState> {
   TodoCubit() : super(TodoInitial());
 
   addTask(String title) {
@@ -25,5 +31,21 @@ class TodoCubit extends Cubit<TodoState> {
       ...state.tasks.map((task) => task.id == id ? task.copyWith(isDone: !task.isChecked) : task)
     ];
     emit(TodoUpdate(updatedTasks));
+  }
+
+  // Restore the last saved state (On cubit initialization)
+  @override
+  TodoState? fromJson(Map<String, dynamic> json) {
+    return TodoUpdate(
+      List<TaskModel>.from((json['tasks'] as List).map((task) => TaskModel.fromJson(task))),
+    );
+  }
+
+  // Save the current state to storage (Everytime the state changes)
+  @override
+  Map<String, dynamic>? toJson(TodoState state) {
+    return {
+      'tasks': [...state.tasks.map((task) => task.toJson())],
+    };
   }
 }

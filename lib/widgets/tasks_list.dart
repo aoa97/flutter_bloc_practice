@@ -12,6 +12,15 @@ class TasksList extends StatelessWidget {
     final cubit = context.read<TodoCubit>();
     final tasks = context.select((TodoCubit cubit) => cubit.state.tasks);
 
+    if (tasks.isEmpty) {
+      return const Center(
+        child: Text(
+          'No tasks yet',
+          style: TextStyle(fontSize: 20),
+        ),
+      );
+    }
+
     return ListView.builder(
       padding: EdgeInsets.symmetric(vertical: 24),
       itemCount: tasks.length,

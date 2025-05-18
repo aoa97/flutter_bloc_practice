@@ -9,6 +9,22 @@ class TaskModel {
     this.isChecked = false,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'isChecked': isChecked,
+    };
+  }
+
+  factory TaskModel.fromJson(Map<String, dynamic> json) {
+    return TaskModel(
+      id: json['id'],
+      title: json['title'],
+      isChecked: json['isChecked'],
+    );
+  }
+
   TaskModel copyWith({
     int? id,
     String? title,

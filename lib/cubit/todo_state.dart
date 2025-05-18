@@ -10,19 +10,7 @@ sealed class TodoState extends Equatable {
 }
 
 final class TodoInitial extends TodoState {
-  TodoInitial()
-      : super(
-          [
-            TaskModel(
-              id: 1,
-              title: 'Task 1',
-            ),
-            TaskModel(
-              id: 2,
-              title: 'Task 2',
-            ),
-          ],
-        );
+  TodoInitial() : super([]);
 }
 
 final class TodoUpdate extends TodoState {
